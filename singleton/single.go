@@ -7,17 +7,17 @@ import (
 
 var lock = &sync.Mutex{}
 
-type single struct{}
+type Single struct{}
 
-var singleInstance *single
+var SingleInstance *Single
 
-func getInstance() *single {
-	if singleInstance == nil {
+func GetInstance() *Single {
+	if SingleInstance == nil {
 		lock.Lock()
 		defer lock.Unlock()
-		if singleInstance == nil {
+		if SingleInstance == nil {
 			fmt.Println("Creating single instance now.")
-			singleInstance = &single{}
+			SingleInstance = &Single{}
 		} else {
 			fmt.Println("Single instance already created.")
 		}
@@ -25,5 +25,5 @@ func getInstance() *single {
 		fmt.Println("Single instance already created.")
 	}
 
-	return singleInstance
+	return SingleInstance
 }
